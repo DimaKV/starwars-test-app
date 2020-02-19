@@ -1,11 +1,25 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import './app.css';
+
+import Header from '../header';
+import RandomPlanet from '../random-planet';
+import ItemList from '../item-list';
+import PersonaDetails from '../personal-details';
 
 function App() {
   return (
-    <div className="App">
-     <h1>Hello world</h1>
-    </div>
+    <Fragment>
+      <Header />
+      <main>
+          <div className="container">
+            <RandomPlanet />
+            <div className="row">
+              <ItemList />
+              <PersonaDetails />
+            </div>
+          </div>
+      </main>
+    </Fragment>
   );
 }
 

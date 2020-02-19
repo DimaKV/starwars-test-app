@@ -1,0 +1,34 @@
+header {
+    margin: 10px 0;
+  }
+  
+  header .logo {
+    font-size: 1.5rem;
+  }
+  
+  .topmenu {
+    margin: 10px 0 0 0;
+  }
+  
+  .topmenu ul {
+    list-style: none;
+  }
+  
+  .topmenu li {
+    display: inline-block;
+    margin: 0 10px;
+  }
+
+
+
+  @media screen and (max-width: 576px) {
+    .logo-row {
+      text-align: center;
+    }
+    .topmenu {
+      text-align: center;
+    }
+    .topmenu ul {
+      padding: 0;
+    }
+  }

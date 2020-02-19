@@ -1,0 +1,16 @@
+ .planet img {
+    width: 100px;
+    border-radius: 0.25rem;
+  }
+  
+  .planet ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .planet li {
+    padding: 0 0 5px 0;
+    margin: 0 0 7px 0;
+    border-bottom: 1px solid #4f7602;
+  }
