@@ -6,7 +6,13 @@ import RandomPlanet from '../random-planet';
 import ItemList from '../item-list';
 import PersonaDetails from '../personal-details';
 
+import Spinner from '../spinner';
+
+import {testService} from '../../services';
+
 function App() {
+  const testServiceData = new testService();
+  console.log(testServiceData.getPeople()); 
   return (
     <Fragment>
       <Header />
@@ -15,7 +21,7 @@ function App() {
             <RandomPlanet />
             <div className="row">
               <ItemList />
-              <PersonaDetails />
+              <PersonaDetails />                           
             </div>
           </div>
       </main>

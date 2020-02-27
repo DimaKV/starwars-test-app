@@ -9,7 +9,7 @@ const PersonalDetails = () => {
                 <div className="card-body">
                     <div className="row">
                         <div className="media descr-item">
-                            <img src="https://via.placeholder.com/150x200" class="align-self-start mr-3" alt="..." />
+                            <img src="https://via.placeholder.com/150x200" className="align-self-start mr-3" alt="..." />
                             <div className="media-body">
                                 <h5 className="mt-0">Name</h5>
                                 <ul>
