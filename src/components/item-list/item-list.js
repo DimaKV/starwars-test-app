@@ -1,33 +1,71 @@
-import React from 'react';
+import React , {Component} from 'react';
 import './item-list.css';
 
-const ItemList = () => {
-    return(
+import {connect} from 'react-redux';
+
+import withSWT from '../hoc';
+
+
+class ItemList extends Component{
+    constructor(){
+        super();       
+    };
+
+
+    componentDidMount(){
+        const {testServiceData} = this.props;
+        const data = testServiceData.getPeople();
+        // console.log(data);
+        this.props.peopleFetch(data);        
+    }
+    
+
+    render(){
+       
+        const data = this.props.data;        
+        const showItemList = data.map( (item) => {
+            return (
+                <li className="list-group-item list-group-item-action" key={item.id}>
+                    <a href="#">{item.name}, {item.gender}</a>
+                </li>
+            )
+        } );
+
         
-                <div className="col-md-6">
-                    <div className="list-group list-item">
-                        <ul className="list-group">
-                            <li className="list-group-item list-group-item-action">
-                                <a href="#">l</a>
-                            </li>
-                            <li className="list-group-item list-group-item-action">
-                                <a href="#">2</a>
-                            </li>
-                            <li className="list-group-item list-group-item-action">
-                                <a href="#">3</a>
-                            </li>
-                            <li className="list-group-item list-group-item-action">
-                                <a href="#">4</a>
-                            </li>
-                            <li className="list-group-item list-group-item-action">
-                                <a href="#">5</a>
-                            </li>
-                        </ul>
-                    </div>
+
+        return(
+        
+            <div className="col-md-6">
+                <div className="list-group list-item">
+                    <ul className="list-group">
+                        {showItemList}
+                    </ul>
                 </div>
-                
-           
-    )
+            </div>            
+       
+        )
+
+    }
+};
+
+
+const mapStateToProps = (state) => {    
+    return {
+      data: state.people
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        peopleFetch: (newPeople) => {
+            
+            return {
+                type: 'FETCH_PEOPLE',
+                payload: newPeople
+            }
+        } 
+    }
 }
 
-export default ItemList;
+
+export default withSWT()( connect(mapStateToProps, mapDispatchToProps)(ItemList) );
