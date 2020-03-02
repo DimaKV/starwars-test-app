@@ -1,6 +1,8 @@
 import React , {Component} from 'react';
 import './item-list.css';
 
+import Spinner from '../spinner';
+
 import {connect} from 'react-redux';
 
 import withSWT from '../hoc';
@@ -13,16 +15,21 @@ class ItemList extends Component{
 
 
     componentDidMount(){
-        const {testServiceData} = this.props;
-        const data = testServiceData.getPeople();
-        // console.log(data);
-        this.props.peopleFetch(data);        
+        const {testServiceData, peopleFetchRequested} = this.props;
+        peopleFetchRequested();
+        testServiceData.getPeople()
+        .then( (data) =>  
+            this.props.peopleFetch(data) 
+        );       
+                
     }
     
 
     render(){
        
-        const data = this.props.data;        
+        const {data, loaded } = this.props; // получаем от mapStateToProps
+        // console.log('dada', data)
+              
         const showItemList = data.map( (item) => {
             return (
                 <li className="list-group-item list-group-item-action" key={item.id}>
@@ -31,6 +38,7 @@ class ItemList extends Component{
             )
         } );
 
+        const showComponent = loaded ? showItemList : <Spinner />
         
 
         return(
@@ -38,7 +46,7 @@ class ItemList extends Component{
             <div className="col-md-6">
                 <div className="list-group list-item">
                     <ul className="list-group">
-                        {showItemList}
+                        {showComponent}
                     </ul>
                 </div>
             </div>            
@@ -51,18 +59,27 @@ class ItemList extends Component{
 
 const mapStateToProps = (state) => {    
     return {
-      data: state.people
+      data: state.peopleList.people,
+      loaded: state.peopleList.loaded
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         peopleFetch: (newPeople) => {
-            
-            return {
-                type: 'FETCH_PEOPLE',
-                payload: newPeople
-            }
+            return dispatch(
+                {
+                    type: 'FETCH_PEOPLE',
+                    payload: newPeople
+                }
+            )
+        },
+        peopleFetchRequested: () => {
+            return dispatch(
+                {
+                    type: 'FETCH_PEOPLE_REQUESTED'
+                }
+            )
         } 
     }
 }

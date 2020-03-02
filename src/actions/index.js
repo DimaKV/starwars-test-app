@@ -1,10 +1,17 @@
-const peopleFetch = (newPeople) => {
+const fetchPeople = (newPeople) => {
     return {
         type: 'FETCH_PEOPLE',
-        action: newPeople
+        payload: newPeople
     }
 };
 
+const fetchPeopleRequested  = () => {
+    return {
+        type: "FETCH_PEOPLE_REQUESTED"
+    }
+} 
+
 export {
-    peopleFetch
+    fetchPeople,
+    fetchPeopleRequested
 };

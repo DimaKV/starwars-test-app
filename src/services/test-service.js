@@ -5,7 +5,7 @@ export default class testService{
         this.people = [
             {
                 id:1,
-                name: 'John Newton',
+                name: 'John Newton!',
                 gender: 'male',
                 birthYear: '1643',
                 eyeColor: 'brown'
@@ -29,11 +29,16 @@ export default class testService{
 
     }
 
+    //добавляем искусственную ассинхронность через setTimeout и promise
     getPeople() {
-        return this.people;
+        return new Promise( (resolve) => {
+            setTimeout( () => {resolve(this.people)}, 700);
+        } );
     }
 
     getPerson(id){
-        return this.people[id];
+        return new Promise( (resolve) => {
+            setTimeout( () => {resolve(this.people[id])}, 700 );
+        } )
     }
 }
