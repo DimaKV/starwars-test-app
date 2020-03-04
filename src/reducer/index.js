@@ -4,7 +4,9 @@ const init = {
             {id: 1, name: 'Aq', gender: 'male' },
             {id: 2, name: 'B', gender: 'female'}
         ],
-        loaded: false    
+        loaded: false,
+        activePerson: undefined,
+        person: {id: 1, name: 'Aq', gender: 'male', eyeColor: 'b'}     
     }
 };
 
@@ -20,19 +22,29 @@ const reducer = (state = init, action) => {
         case 'FETCH_PEOPLE_REQUESTED': {
             return {
                 peopleList: {
+                    ...state.peopleList,
                     people : [],
-                    loaded: false 
+                    loaded: false                     
                 }
             }
         }
         case 'FETCH_PEOPLE': {            
             return {                
                 peopleList: {
+                    ...state.peopleList,
                     people : action.payload,
                     loaded: true 
                 }
                 
             } 
+        }
+        case 'FETCH_PERSON': {
+            return {
+                peopleList: {
+                    ...state.peopleList,
+                    person: action.payload
+                }
+            }
         }
         default: {
             // console.log('defaults works');

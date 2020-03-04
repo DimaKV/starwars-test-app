@@ -1,7 +1,14 @@
 import React from 'react';
 import './personal-details.css';
 
-const PersonalDetails = () => {
+import Spinner from '../spinner';
+
+import {connect} from 'react-redux';
+
+import withSWT from '../hoc';
+
+const PersonalDetails = ( {person} ) => {
+    const {name, gender, eyeColor} = person;
     return (
         <div className="col-md-6">
             <div className="card border-primary mb-3">
@@ -11,10 +18,10 @@ const PersonalDetails = () => {
                         <div className="media descr-item">
                             <img src="https://via.placeholder.com/150x200" className="align-self-start mr-3" alt="..." />
                             <div className="media-body">
-                                <h5 className="mt-0">Name</h5>
+                                <h5 className="mt-0">{name}</h5>
                                 <ul>
-                                    <li>Gender <strong>female</strong></li>
-                                    <li>Eye Color <strong>brown</strong></li>
+                                    <li>Gender <strong>{gender}</strong></li>
+                                    <li>Eye Color <strong>{eyeColor}</strong></li>
                                 </ul>
                             </div>
                             </div>
@@ -25,4 +32,10 @@ const PersonalDetails = () => {
     )
 }
 
-export default PersonalDetails;
+const mapStateToProps = (state) => {
+    return {
+        person: state.peopleList.person
+    }
+}
+
+export default connect(mapStateToProps)(PersonalDetails);

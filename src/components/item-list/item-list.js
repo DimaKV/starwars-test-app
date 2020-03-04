@@ -16,7 +16,7 @@ class ItemList extends Component{
 
     componentDidMount(){
         const {testServiceData, peopleFetchRequested} = this.props;
-        peopleFetchRequested();
+        peopleFetchRequested(); // переводит loaded в false для отображения спинера. Это нужно при смене страницы только
         testServiceData.getPeople()
         .then( (data) =>  
             this.props.peopleFetch(data) 
