@@ -23,6 +23,16 @@ class ItemList extends Component{
         );       
                 
     }
+
+    getPerson (id) {        
+        const {testServiceData, personFetch, personFetchRequest} = this.props;
+        personFetchRequest(); //для спиннера
+        testServiceData.getPerson(id)
+        .then( (data) => {            
+            personFetch(data);
+        } );
+
+    }
     
 
     render(){
@@ -30,15 +40,21 @@ class ItemList extends Component{
         const {data, loaded } = this.props; // получаем от mapStateToProps
         // console.log('dada', data)
               
-        const showItemList = data.map( (item) => {
+        const showItemList = data.map( (item, indx) => {
             return (
-                <li className="list-group-item list-group-item-action" key={item.id}>
-                    <a href="#">{item.name}, {item.gender}</a>
+                <li 
+                    className="list-group-item list-group-item-action"
+                    onClick = { () => { this.getPerson(indx);} } 
+                    key={item.id}>
+
+                        {item.name}, {item.gender}
+
                 </li>
             )
         } );
+        // console.log('showItemList', showItemList);
 
-        const showComponent = loaded ? showItemList : <Spinner />
+        const showContent = loaded ? showItemList : <Spinner />
         
 
         return(
@@ -46,7 +62,7 @@ class ItemList extends Component{
             <div className="col-md-6">
                 <div className="list-group list-item">
                     <ul className="list-group">
-                        {showComponent}
+                        {showContent}
                     </ul>
                 </div>
             </div>            
@@ -80,7 +96,23 @@ const mapDispatchToProps = (dispatch) => {
                     type: 'FETCH_PEOPLE_REQUESTED'
                 }
             )
-        } 
+        },
+        personFetch: (newPerson) => {
+            return dispatch(
+                {
+                    type: 'FETCH_PERSON',
+                    payload: newPerson
+                }
+            )
+        },
+        personFetchRequest: () => {
+            return dispatch(
+                {
+                    type: 'FETCH_PERSON_REQUEST'
+                }
+            )
+        }
+
     }
 }
 

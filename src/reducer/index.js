@@ -5,8 +5,8 @@ const init = {
             {id: 2, name: 'B', gender: 'female'}
         ],
         loaded: false,
-        activePerson: undefined,
-        person: {id: 1, name: 'Aq', gender: 'male', eyeColor: 'b'}     
+        personLoading: false,
+        person: {}     
     }
 };
 
@@ -38,16 +38,26 @@ const reducer = (state = init, action) => {
                 
             } 
         }
-        case 'FETCH_PERSON': {
+        //задача этого action -  personLoading сделать true, что бы отобразился спиннер,
+        //пока данные не загрузились
+        case 'FETCH_PERSON_REQUEST': {            
             return {
                 peopleList: {
-                    ...state.peopleList,
-                    person: action.payload
+                    ...state.peopleList,                    
+                    personLoading: true
                 }
             }
         }
-        default: {
-            // console.log('defaults works');
+        case 'FETCH_PERSON': {            
+            return {
+                peopleList: {
+                    ...state.peopleList,
+                    person: action.payload,
+                    personLoading: false
+                }
+            }
+        }
+        default: {            
             return state;
         }
 

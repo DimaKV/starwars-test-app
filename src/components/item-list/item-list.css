@@ -1,3 +1,7 @@
+.list-group-item{
+  cursor: pointer;
+}
+
 @media screen and (max-width: 768px) {
     .list-item {
       margin-bottom: 10px;
