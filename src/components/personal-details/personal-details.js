@@ -27,7 +27,7 @@ const PersonalDetails = ( {person, personLoading} ) => {
     
 
    
-    console.log(name, personLoading);
+    // console.log(name, personLoading);
     const showMessage = (!name && !personLoading) ? <h5>make a choise please</h5> : null; 
     const showPersonalDescr = (name && !personLoading) ? personalDescr : null;
     const showSpinner = (personLoading) ? <Spinner/>: null;

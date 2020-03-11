@@ -27,18 +27,57 @@ export default class testService{
         ];
 
 
+        this.planets = [
+            {
+                id:1,
+                name: 'Planet1',
+                rotationPeriod: '304',
+                diameter: 10465,
+                population: 200000
+            },
+            {
+                id:2,
+                name: 'Planet2',
+                rotationPeriod: '305',
+                diameter: 12465,
+                population: 500000
+            },
+            {
+                id:3,
+                name: 'Planet3',
+                rotationPeriod: '306',
+                diameter: 8465,
+                population: 100000
+            }
+        ];
+
+
     }
 
     //добавляем искусственную ассинхронность через setTimeout и promise
     getPeople() {
         return new Promise( (resolve) => {
-            setTimeout( () => {resolve(this.people)}, 700);
+            setTimeout( () => {resolve(this.people); }, 700);
         } );
     }
 
+    getPlanets() {
+        return new Promise( (resolve) => {
+            setTimeout( () => {resolve(this.planets); }, 700);
+        } );
+    }
+
+
+    getPlanet(id){
+        return new Promise( (resolve) => {
+            setTimeout( () => { resolve(this.planet[id]); }, 700 );
+        } );
+    }
+    
+
     getPerson(id){
         return new Promise( (resolve) => {
-            setTimeout( () => {resolve(this.people[id])}, 700 );
-        } )
+            setTimeout( () => { resolve(this.people[id]); }, 700 );
+        } );
     }
 }
