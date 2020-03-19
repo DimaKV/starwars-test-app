@@ -21,64 +21,96 @@ const init = {
 };
 
 
-
 const reducer = (state = init, action) => {
-    
-    if (state===undefined) {       
-        return state;
+
+    return {
+        peopleList: updatePeopleList(state, action),
+        randomPlanet: updateRandomPlanet(state, action)
+    };
+};
+
+
+const updatePeopleList = (state, action) => {
+    if (state === undefined) {
+        return state.peopleList;
     }
-    switch (action.type){
-        //этот action нужен для того, что бы сбросить loaded в false. Что бы спинер отображался при смене страниц, например
+
+    switch (action.type) {
+
+        //этот action нужен для того, что бы сбросить loaded в false. 
+        //Что бы спинер отображался при смене страниц, например
         case 'FETCH_PEOPLE_REQUESTED': {
-            return {
-                ...state,
-                peopleList: {
-                    ...state.peopleList,
-                    people : [],
-                    loaded: false                     
-                }
+            return {                
+                ...state.peopleList,
+                people : [],
+                loaded: false   
             }
         }
         case 'FETCH_PEOPLE': {            
-            return {
-                ...state,                
-                peopleList: {
-                    ...state.peopleList,
-                    people : action.payload,
-                    loaded: true 
-                }
+            return {                               
+                ...state.peopleList,
+                people : action.payload,
+                loaded: true 
                 
             } 
         }
         //задача этого action -  personLoading сделать true, что бы отобразился спиннер,
         //пока данные не загрузились
-        case 'FETCH_PERSON_REQUEST': {            
-            return {
-                ...state,
-                peopleList: {
-                    ...state.peopleList,                    
-                    personLoading: true
-                }
+        case 'FETCH_PERSON_REQUESTED': {            
+            return {                
+                ...state.peopleList,                    
+                personLoading: true
             }
         }
         case 'FETCH_PERSON': {            
-            return {
-                ...state,
-                peopleList: {
-                    ...state.peopleList,
-                    person: action.payload,
-                    personLoading: false
-                }
+            return {                
+                ...state.peopleList,
+                person: action.payload,
+                personLoading: false
+            }
+        }
+
+        default: 
+        return state.peopleList;
+
+    }
+};
+
+const updateRandomPlanet = (state, action) => {
+
+    if (state===undefined) {       
+        return state.randomPlanet;
+    }
+
+
+    switch (action.type){       
+        
+
+        //задача этого action -  loading сделать true, что бы отобразился спиннер,
+        //один раз при первой подгузке планеты
+        case 'FETCH_RANDOM_PLANET_REQUESTED': {
+            return {              
+                planet: [],
+                loading: true
+            }
+        }
+        case 'FETCH_RANDOM_PLANET': {
+            return {                
+                planet: action.payload,
+                loading: false
             }
         }
         default: {            
-            return state;
+            return state.randomPlanet;
         }
-
-        
-
     }
-    
-}
+
+};
+
+
+
+
+
+ 
 
 export default reducer;

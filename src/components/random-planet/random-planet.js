@@ -1,9 +1,11 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import './random-planet.css';
 
 import Spinner from '../spinner';
 
 import {connect} from 'react-redux';
+import { bindActionCreators } from "redux";
+import *as actions from '../../actions';
 
 import withSWT from '../hoc';
 
@@ -11,18 +13,78 @@ import withSWT from '../hoc';
 
 class RandomPlanet extends Component {
 
-    componentDidMount(){
-        console.log('planet ready')
+    
+
+    constructor(){
+        super();
+        this.intervalID = undefined;
     }
+
+    // генерирует id, получает рандомную планету, перезаписывает стейт
+    updateData() {
+        const {testServiceData, fetchRandomPlanet } = this.props;        
+
+        const id = Math.floor(Math.random()*3 );           
+        testServiceData.getPlanet(id)
+        .then( (data) => fetchRandomPlanet(data) );
+    }
+
+    
+    //деалет запрос, запусает random
+    uploadData () {
+        const {fetchRandomPlanetRequested} = this.props;
+        fetchRandomPlanetRequested();
+        this.updateData ();        
+        this.intervalID = setInterval( () => {
+            this.updateData ();
+        }, 3000 );
+    }
+
+    //фукция висит на кнопке. Останавливает или запускает рандом
+    toggleRandomPlanet(){
+        console.log(this.intervalID);
+        if(this.intervalID) {
+            clearInterval(this.intervalID);
+            this.intervalID = undefined;
+        } else {
+            this.uploadData();
+        }
+        
+    }
+    
+    // после отрисовки компонента далет запрос к серверу для получения данных
+    componentDidMount(){
+        this.uploadData();
+    }   
 
     componentWillUnmount(){
         console.log('planet gone');
+        clearInterval(this.intervalID);
     }
 
     render(){
 
-        const {planet} = this.props;        
-
+        const {planet, loading} = this.props;        
+        const randomPlanet = (
+          
+                <div className="media planet">
+                    <img src="https://via.placeholder.com/150x200" className="align-self-start mr-3" alt="..." />
+                    <div className="media-body">
+                        <h5 className="mt-0">{planet.name}</h5>
+                        <ul>
+                            <li>Population <strong>{planet.population}</strong></li>
+                            <li>Rotation Period <strong>{planet.rotationPeriod}</strong></li>
+                            <li>Diameter <strong>{planet.diameter}</strong></li>
+                        </ul>
+                        <button className="btn btn-warning" 
+                            onClick={this.toggleRandomPlanet.bind(this)}> 
+                            Stop/Start RandomPlanet
+                        </button>                    
+                    </div>
+                </div>               
+            
+        );        
+        const showContent = loading ? <Spinner /> : randomPlanet;
         return (
             <div className="row">
                 <div className="col-12">
@@ -30,18 +92,9 @@ class RandomPlanet extends Component {
                         <div className="card-header">Random Planet</div>
                         <div className="card-body">
                             <div className="row">
-                                <div className="media planet">
-                                    <img src="https://via.placeholder.com/150x200" className="align-self-start mr-3" alt="..." />
-                                    <div className="media-body">
-                                    <h5 className="mt-0">{planet.name}</h5>
-                                    <ul>
-                                        <li>Population <strong>{planet.population}</strong></li>
-                                        <li>Rotation Period <strong>{planet.rotationPeriod}</strong></li>
-                                        <li>Diameter <strong>{planet.diameter}</strong></li>
-                                    </ul>
-                                    </div>
-                                </div>
+                                {showContent}
                             </div>
+                           
                         </div>
                     </div>
                 </div>
@@ -53,48 +106,26 @@ class RandomPlanet extends Component {
 };
 
 const mapStateToProps = (state) => {
+    // console.log('state', state);
     return {
-        planet: state.randomPlanet.planet
+        planet: state.randomPlanet.planet,
+        loading: state.randomPlanet.loading
     }
 };
 
-export default connect(mapStateToProps)(RandomPlanet);
+const mapDispatchToProps = (dispatch) => {
+    const {fetchRandomPlanetRequested, fetchRandomPlanet} = bindActionCreators(actions, dispatch);
+    return {
+        fetchRandomPlanet: (newRandomPlanet) => {
+            fetchRandomPlanet(newRandomPlanet)
+        },
+        fetchRandomPlanetRequested : fetchRandomPlanetRequested
+    }
+}
+
+export default withSWT()(connect(mapStateToProps, mapDispatchToProps)(RandomPlanet));
 
 
 
 
 
-// import React from 'react';
-// import './random-planet.css'
-
-// const RandomPlanet = () => {
-
-        
-//     return (
-//             <div className="row">
-//                 <div className="col-12">
-//                     <div className="card border-success mb-3">
-//                         <div className="card-header">Random Planet</div>
-//                         <div className="card-body">
-//                             <div className="row">
-//                                 <div className="media planet">
-//                                     <img src="https://via.placeholder.com/150x200" className="align-self-start mr-3" alt="..." />
-//                                     <div className="media-body">
-//                                     <h5 className="mt-0">Name</h5>
-//                                     <ul>
-//                                         <li>Population <strong>200000</strong></li>
-//                                         <li>Rotation Period <strong>24</strong></li>
-//                                         <li>Diameter <strong>12500</strong></li>
-//                                     </ul>
-//                                     </div>
-//                                 </div>
-//                             </div>
-//                         </div>
-//                     </div>
-//                 </div>
-//             </div>
-//     )
-
-// };
-
-// export default RandomPlanet;

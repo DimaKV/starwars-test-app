@@ -4,6 +4,7 @@ import './item-list.css';
 import Spinner from '../spinner';
 
 import {connect} from 'react-redux';
+import *as actions from '../../actions';
 
 import withSWT from '../hoc';
 
@@ -15,21 +16,21 @@ class ItemList extends Component{
 
 
     componentDidMount(){
-        const {testServiceData, peopleFetchRequested} = this.props;
-        peopleFetchRequested(); // переводит loaded в false для отображения спинера. Это нужно при смене страницы только
-        testServiceData.getPeople()
+        const {getData, fetchPeopleRequested} = this.props;
+        fetchPeopleRequested(); // переводит loaded в false для отображения спинера. Это нужно при смене страницы только
+        getData()
         .then( (data) =>  
-            this.props.peopleFetch(data) 
+            this.props.fetchPeople(data) 
         );       
                 
     }
 
-    getPerson (id) {        
-        const {testServiceData, personFetch, personFetchRequest} = this.props;
-        personFetchRequest(); //для спиннера
-        testServiceData.getPerson(id)
+    getObj (id) {        
+        const {getDataDetails, fetchPerson, fetchPersonRequested} = this.props;
+        fetchPersonRequested(); //для спиннера
+        getDataDetails(id)
         .then( (data) => {            
-            personFetch(data);
+            fetchPerson(data);
         } );
 
     }
@@ -44,7 +45,7 @@ class ItemList extends Component{
             return (
                 <li 
                     className="list-group-item list-group-item-action"
-                    onClick = { () => { this.getPerson(indx);} } 
+                    onClick = { () => { this.getObj(indx);} } 
                     key={item.id}>
 
                         {item.name}, {item.gender}
@@ -80,41 +81,41 @@ const mapStateToProps = (state) => {
     }
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        peopleFetch: (newPeople) => {
-            return dispatch(
-                {
-                    type: 'FETCH_PEOPLE',
-                    payload: newPeople
-                }
-            )
-        },
-        peopleFetchRequested: () => {
-            return dispatch(
-                {
-                    type: 'FETCH_PEOPLE_REQUESTED'
-                }
-            )
-        },
-        personFetch: (newPerson) => {
-            return dispatch(
-                {
-                    type: 'FETCH_PERSON',
-                    payload: newPerson
-                }
-            )
-        },
-        personFetchRequest: () => {
-            return dispatch(
-                {
-                    type: 'FETCH_PERSON_REQUEST'
-                }
-            )
-        }
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         fetchPeople: (newPeople) => {
+//             return dispatch(
+//                 {
+//                     type: 'FETCH_PEOPLE',
+//                     payload: newPeople
+//                 }
+//             )
+//         },
+//         fetchPeopleRequested: () => {
+//             return dispatch(
+//                 {
+//                     type: 'FETCH_PEOPLE_REQUESTED'
+//                 }
+//             )
+//         },
+//         fetchPerson: (newPerson) => {
+//             return dispatch(
+//                 {
+//                     type: 'FETCH_PERSON',
+//                     payload: newPerson
+//                 }
+//             )
+//         },
+//         fetchPersonRequested: () => {
+//             return dispatch(
+//                 {
+//                     type: 'FETCH_PERSON_REQUESTED'
+//                 }
+//             )
+//         }
 
-    }
-}
+//     }
+// }
 
 
-export default withSWT()( connect(mapStateToProps, mapDispatchToProps)(ItemList) );
+export default connect(mapStateToProps, actions)(ItemList);

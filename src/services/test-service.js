@@ -55,27 +55,27 @@ export default class testService{
     }
 
     //добавляем искусственную ассинхронность через setTimeout и promise
-    getPeople() {
+    getPeople = () => {
         return new Promise( (resolve) => {
             setTimeout( () => {resolve(this.people); }, 700);
         } );
     }
 
-    getPlanets() {
+    getPlanets = () => {
         return new Promise( (resolve) => {
             setTimeout( () => {resolve(this.planets); }, 700);
         } );
     }
 
 
-    getPlanet(id){
+    getPlanet = (id) => {
         return new Promise( (resolve) => {
-            setTimeout( () => { resolve(this.planet[id]); }, 700 );
+            setTimeout( () => { resolve(this.planets[id]); }, 700 );
         } );
     }
     
 
-    getPerson(id){
+    getPerson = (id) => {
         return new Promise( (resolve) => {
             setTimeout( () => { resolve(this.people[id]); }, 700 );
         } );

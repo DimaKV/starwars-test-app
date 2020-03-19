@@ -5,6 +5,7 @@ import Header from '../header';
 import RandomPlanet from '../random-planet';
 import ItemList from '../item-list';
 import PersonalDetails from '../personal-details';
+import {PeoplePage} from '../pages';
 
 import Spinner from '../spinner';
 
@@ -16,10 +17,12 @@ function App() {
       <main>
           <div className="container">
             <RandomPlanet />
-            <div className="row">
-              <ItemList />
+            {/* <div className="row">
+              <ItemList />              
               <PersonalDetails />                           
-            </div>
+            </div> */}
+            <PeoplePage />
+            
           </div>
       </main>
     </Fragment>
