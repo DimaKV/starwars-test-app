@@ -7,7 +7,7 @@ import PersonalDetails from '../personal-details';
 import withSWT from '../hoc';
 
 const PeoplePage = ({testServiceData}) => {
-    console.log(testServiceData);
+    // console.log(testServiceData);
     return (
         <div className="row">
             <ItemList 
