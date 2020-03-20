@@ -3,8 +3,6 @@ import './item-list.css';
 
 import Spinner from '../spinner';
 
-import {connect} from 'react-redux';
-import *as actions from '../../actions';
 
 import withSWT from '../hoc';
 
@@ -16,21 +14,21 @@ class ItemList extends Component{
 
 
     componentDidMount(){
-        const {getData, fetchPeopleRequested} = this.props;
-        fetchPeopleRequested(); // переводит loaded в false для отображения спинера. Это нужно при смене страницы только
+        const {getData, fetchObjsRequested, fetchObjs} = this.props;
+        fetchObjsRequested(); // переводит loaded в false для отображения спинера. Это нужно при смене страницы только
         getData()
         .then( (data) =>  
-            this.props.fetchPeople(data) 
+            fetchObjs(data) 
         );       
                 
     }
 
     getObj (id) {        
-        const {getDataDetails, fetchPerson, fetchPersonRequested} = this.props;
-        fetchPersonRequested(); //для спиннера
+        const {getDataDetails, fetchOneObj, fetchOneObjRequested} = this.props;
+        fetchOneObjRequested(); //для спиннера
         getDataDetails(id)
         .then( (data) => {            
-            fetchPerson(data);
+            fetchOneObj(data);
         } );
 
     }
@@ -38,8 +36,8 @@ class ItemList extends Component{
 
     render(){
        
-        const {data, loaded } = this.props; // получаем от mapStateToProps
-        // console.log('dada', data)
+        const {data, loaded } = this.props; // получаем от PeoplePage
+        console.log('dada ItemList', data)
               
         const showItemList = data.map( (item, indx) => {
             return (
@@ -74,12 +72,12 @@ class ItemList extends Component{
 };
 
 
-const mapStateToProps = (state) => {    
-    return {
-      data: state.peopleList.people,
-      loaded: state.peopleList.loaded
-    }
-};
+// const mapStateToProps = (state) => {    
+//     return {
+//       data: state.peopleList.people,
+//       loaded: state.peopleList.loaded
+//     }
+// };
 
 // const mapDispatchToProps = (dispatch) => {
 //     return {
@@ -118,4 +116,4 @@ const mapStateToProps = (state) => {
 // }
 
 
-export default connect(mapStateToProps, actions)(ItemList);
+export default ItemList;
