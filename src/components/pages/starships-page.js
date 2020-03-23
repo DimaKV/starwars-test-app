@@ -13,7 +13,7 @@ import withSWT from '../hoc';
 
 const StarshipsPage = (props) => {
     const {
-        testServiceData, data, loaded, 
+        testServiceData, itemArr, loaded, 
         fetchObjs, fetchObjsRequested,
         fetchOneObj, fetchOneObjRequested, 
         oneObj, oneObjLoading
@@ -21,18 +21,15 @@ const StarshipsPage = (props) => {
     
     return (
         <div className="row">
-            <ItemList                
+            <ItemList
+                {...props}                
                 getData = {testServiceData.getStarships}               
                 getDataDetails = {testServiceData.getStarship}               
                 renderItem = { (item) => {
-                    return `${item.name}, crew: ${item.crew}`                    
-                } }               
-                itemArr = {data}               
-                loaded = {loaded}                
-                fetchObjs = {fetchObjs}              
-                fetchOneObj = {fetchOneObj}                
-                fetchObjsRequested = {fetchObjsRequested}                
-                fetchOneObjRequested = {fetchOneObjRequested}
+                        return `${item.name}, crew: ${item.crew}`                    
+                    } 
+                }               
+                
                 />              
             <PersonalDetails
                 itemDetails = {oneObj}
@@ -58,9 +55,9 @@ const StarshipsPage = (props) => {
 };
 
 const mapStateToProps = (state) => {
-    console.log(state.starshipsList);
+    // console.log(state.starshipsList);
     return {
-        data : state.starshipsList.starships,
+        itemArr : state.starshipsList.starships,
         loaded: state.starshipsList.loaded,
         oneObj: state.starshipsList.oneStarship,
         oneObjLoading: state.starshipsList.oneStarshipLoading
@@ -70,7 +67,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     const {
         fetchStarships, fetchStarshipsRequested, 
-        fetchOneStarship, fetchOneStarshipRequested
+        fetchOneStarship, fetchOneStarshipRequested,
+        clearOneStarshipData
     } = bindActionCreators(actions, dispatch);
 
     return {
@@ -81,7 +79,8 @@ const mapDispatchToProps = (dispatch) => {
         fetchOneObj: (newOneStarship) => {
             fetchOneStarship(newOneStarship)
         },
-        fetchOneObjRequested: fetchOneStarshipRequested
+        fetchOneObjRequested: fetchOneStarshipRequested,
+        clearOneObjData: clearOneStarshipData
     }
 }
 

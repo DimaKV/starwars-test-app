@@ -87,6 +87,13 @@ const updatePeopleList = (state, action) => {
             }
         }
 
+        case 'CLEAR_PERSON_DATA': {
+            return {
+                ...state.peopleList,
+                person: {}
+            }
+        }
+
         default: 
         return state.peopleList;
 
@@ -116,7 +123,7 @@ const updateRandomPlanet = (state, action) => {
                 planet: action.payload,
                 loading: false
             }
-        }
+        }        
         default: {            
             return state.randomPlanet;
         }
@@ -161,6 +168,13 @@ const updatePlanetsList = (state, action) => {
                 ...state.planetsList,
                 onePlanet: action.payload,
                 onePlanetLoading: false
+            }
+        }
+        
+        case 'CLEAR_ONE_PLANET_DATA': {
+            return {
+                ...state.planetsList,
+                onePlanet: {}
             }
         }
 
@@ -209,6 +223,13 @@ const updateStarshipsList = (state, action) => {
                 ...state.starshipsList,
                 oneStarship: action.payload,
                 oneStarshipLoading: false
+            }
+        }
+
+        case 'CLEAR_ONE_STARSHIP_DATA': {
+            return {
+                ...state.starshipsList,
+                oneStarship: {}
             }
         }
 

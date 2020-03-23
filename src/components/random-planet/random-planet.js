@@ -42,7 +42,7 @@ class RandomPlanet extends Component {
 
     //фукция висит на кнопке. Останавливает или запускает рандом
     toggleRandomPlanet(){
-        console.log(this.intervalID);
+        // console.log(this.intervalID);
         if(this.intervalID) {
             clearInterval(this.intervalID);
             this.intervalID = undefined;

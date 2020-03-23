@@ -14,9 +14,9 @@ const Header = () => {
                     <div className="col-sm-8">
                         <nav className="topmenu">
                             <ul>
-                                <li><Link to = '/people'>People</Link></li>
-                                <li><Link to = '/planets'>Planets</Link></li>
-                                <li><Link to = '/starships'>Starships</Link></li>
+                                <li><Link to = '/people/'>People</Link></li>
+                                <li><Link to = '/planets/'>Planets</Link></li>
+                                <li><Link to = '/starships/'>Starships</Link></li>
                             </ul>
                         </nav>
                     </div>

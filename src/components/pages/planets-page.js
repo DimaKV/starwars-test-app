@@ -16,12 +16,14 @@ const PlanetsPage = (props) => {
         testServiceData, data, loaded, 
         fetchObjs, fetchObjsRequested,
         fetchOneObj, fetchOneObjRequested, 
-        onePlanet, onePlanetLoading
+        onePlanet, onePlanetLoading,
+        clearOneObjData
     } = props;
     
     return (
         <div className="row">
-            <ItemList                
+            <ItemList
+                {...props}                
                 getData = {testServiceData.getPlanets}               
                 getDataDetails = {testServiceData.getPlanet}               
                 renderItem = { (item) => {
@@ -33,6 +35,7 @@ const PlanetsPage = (props) => {
                 fetchOneObj = {fetchOneObj}                
                 fetchObjsRequested = {fetchObjsRequested}                
                 fetchOneObjRequested = {fetchOneObjRequested}
+                clearOneObjData = {clearOneObjData}
                 />              
             <PersonalDetails
                 itemDetails = {onePlanet}
@@ -65,7 +68,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    const {fetchPlanets, fetchPlanetsRequested, fetchOnePlanet, fetchOnePlanetRequested} = bindActionCreators(actions, dispatch);
+    const {fetchPlanets, fetchPlanetsRequested, fetchOnePlanet, fetchOnePlanetRequested, clearOnePlanetData} = bindActionCreators(actions, dispatch);
     return {
         fetchObjs: (newPlanets) => {
             fetchPlanets(newPlanets)
@@ -74,7 +77,8 @@ const mapDispatchToProps = (dispatch) => {
         fetchOneObj: (newOnePlanet) => {
             fetchOnePlanet(newOnePlanet)
         },
-        fetchOneObjRequested: fetchOnePlanetRequested
+        fetchOneObjRequested: fetchOnePlanetRequested,
+        clearOneObjData: clearOnePlanetData
     }
 }
 

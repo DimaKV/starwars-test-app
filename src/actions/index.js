@@ -24,6 +24,14 @@ const fetchPersonRequested = () => {
     }
 };
 
+const clearPersonData = () => {
+    return {
+        type: 'CLEAR_PERSON_DATA'
+    }
+};
+
+
+
 const fetchRandomPlanet = (newPlanet) => {
     return {
         type: 'FETCH_RANDOM_PLANET',
@@ -64,6 +72,12 @@ const fetchOnePlanetRequested = () => {
     }
 };
 
+const clearOnePlanetData = () => {
+    return {
+        type: 'CLEAR_ONE_PLANET_DATA'
+    }
+};
+
 
 
 
@@ -94,6 +108,12 @@ const fetchOneStarshipRequested = () => {
     }
 };
 
+const clearOneStarshipData = () => {
+    return {
+        type: 'CLEAR_ONE_STARSHIP_DATA'
+    }
+};
+
 
 
 
@@ -105,14 +125,19 @@ export {
     fetchPeopleRequested,
     fetchPerson,
     fetchPersonRequested,
+    clearPersonData,
+    
     fetchRandomPlanet,
     fetchRandomPlanetRequested,
     fetchPlanets,
     fetchPlanetsRequested,
     fetchOnePlanet,
     fetchOnePlanetRequested,
+    clearOnePlanetData,
+
     fetchStarships,
     fetchStarshipsRequested,
     fetchOneStarship,
-    fetchOneStarshipRequested
+    fetchOneStarshipRequested,
+    clearOneStarshipData
 };

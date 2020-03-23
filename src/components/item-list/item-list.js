@@ -13,28 +13,49 @@ class ItemList extends Component{
     componentDidMount(){
         const {getData, fetchObjsRequested, fetchObjs} = this.props;
         fetchObjsRequested(); // переводит loaded в false для отображения спинера. Это нужно при смене страницы только
+        
         getData()
         .then( (data) =>  
             fetchObjs(data) 
-        );       
+        );
+        
+        // получаем id из URL
+        const idURL = this.props.match.params.id;
+
+        // если такое id существуем, то обновляем state
+        if (idURL) {            
+            this.getObj(idURL);
+        }
                 
+    }
+
+    componentWillUnmount() {
+        const {clearOneObjData} = this.props;
+        clearOneObjData();
     }
 
     getObj (id) {        
         const {getDataDetails, fetchOneObj, fetchOneObjRequested} = this.props;
+        //добавляем в URL адрес
+        this.props.history.push(id);        
+        
         fetchOneObjRequested(); //для спиннера
         getDataDetails(id)
         .then( (data) => {            
             fetchOneObj(data);
-        } );
+        } );        
 
     }
+
+    
     
 
     render(){
        
-        const {itemArr, loaded, renderItem } = this.props; // получаем от PeoplePage
+        const {itemArr, loaded, renderItem, idFromURL } = this.props; // получаем от PeoplePage
         // console.log('dada ItemList', itemArr)
+        
+        
               
         const showItemList = itemArr.map( (item, indx) => {
             const label = renderItem(item);
