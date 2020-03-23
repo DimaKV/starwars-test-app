@@ -1,30 +1,30 @@
 import React, {Fragment} from 'react';
 import './app.css';
 
+import { BrowserRouter as Router, Route } from 'react-router-dom'; 
+
 import Header from '../header';
 import RandomPlanet from '../random-planet';
-import ItemList from '../item-list';
-import PersonalDetails from '../personal-details';
 import {PeoplePage} from '../pages';
-
-import Spinner from '../spinner';
+import {PlanetsPage} from '../pages';
+import {StarshipsPage} from '../pages';
 
 function App() {
 
   return (
     <Fragment>
-      <Header />
-      <main>
-          <div className="container">
-            <RandomPlanet />
-            {/* <div className="row">
-              <ItemList />              
-              <PersonalDetails />                           
-            </div> */}
-            <PeoplePage />
-            
-          </div>
-      </main>
+      <Router>
+        <Header />
+        <main>
+            <div className="container">              
+              <Route path = '/' render={ () => <h2> Welcome to StarWars App</h2> } exact = {true} />
+              <Route path = '/' component = {RandomPlanet} exact = {true} />           
+              <Route path = '/people/:id?' component = {PeoplePage} />
+              <Route path = '/planets/:id?' component = {PlanetsPage} />
+              <Route path = '/starships/:id?' component = {StarshipsPage} />
+            </div>
+        </main>
+      </Router>
     </Fragment>
   );
 }

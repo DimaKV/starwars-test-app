@@ -4,9 +4,6 @@ import './item-list.css';
 import Spinner from '../spinner';
 
 
-import withSWT from '../hoc';
-
-
 class ItemList extends Component{
     constructor(){
         super();       
@@ -36,17 +33,19 @@ class ItemList extends Component{
 
     render(){
        
-        const {data, loaded } = this.props; // получаем от PeoplePage
-        console.log('dada ItemList', data)
+        const {itemArr, loaded, renderItem } = this.props; // получаем от PeoplePage
+        // console.log('dada ItemList', itemArr)
               
-        const showItemList = data.map( (item, indx) => {
+        const showItemList = itemArr.map( (item, indx) => {
+            const label = renderItem(item);
+            // console.log(label);
             return (
                 <li 
                     className="list-group-item list-group-item-action"
-                    onClick = { () => { this.getObj(indx);} } 
+                    onClick = { () => { this.getObj(item.id);} } 
                     key={item.id}>
 
-                        {item.name}, {item.gender}
+                        {label}
 
                 </li>
             )

@@ -24,7 +24,7 @@ class RandomPlanet extends Component {
     updateData() {
         const {testServiceData, fetchRandomPlanet } = this.props;        
 
-        const id = Math.floor(Math.random()*3 );           
+        const id = Math.ceil(Math.random()*10);           
         testServiceData.getPlanet(id)
         .then( (data) => fetchRandomPlanet(data) );
     }
@@ -37,7 +37,7 @@ class RandomPlanet extends Component {
         this.updateData ();        
         this.intervalID = setInterval( () => {
             this.updateData ();
-        }, 3000 );
+        }, 4000 );
     }
 
     //фукция висит на кнопке. Останавливает или запускает рандом
@@ -68,7 +68,7 @@ class RandomPlanet extends Component {
         const randomPlanet = (
           
                 <div className="media planet">
-                    <img src="https://via.placeholder.com/150x200" className="align-self-start mr-3" alt="..." />
+                    <img src={planet.image} className="align-self-start mr-3" alt="..." />
                     <div className="media-body">
                         <h5 className="mt-0">{planet.name}</h5>
                         <ul>

@@ -61,12 +61,17 @@ export default class testService{
         } );
     }
 
+    getPerson = (id) => {
+        return new Promise( (resolve) => {
+            setTimeout( () => { resolve(this.people[id]); }, 700 );
+        } );
+    }
+
     getPlanets = () => {
         return new Promise( (resolve) => {
             setTimeout( () => {resolve(this.planets); }, 700);
         } );
     }
-
 
     getPlanet = (id) => {
         return new Promise( (resolve) => {
@@ -75,9 +80,5 @@ export default class testService{
     }
     
 
-    getPerson = (id) => {
-        return new Promise( (resolve) => {
-            setTimeout( () => { resolve(this.people[id]); }, 700 );
-        } );
-    }
+   
 }

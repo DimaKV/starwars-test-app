@@ -3,34 +3,28 @@ import './personal-details.css';
 
 import Spinner from '../spinner';
 
-import {connect} from 'react-redux';
 
 
-const PersonalDetails = ( {person, personLoading} ) => {
+const PersonalDetails = ( {itemDetails, itemLoading, renderItemDetail} ) => {
         
-    const {id, name, gender, eyeColor} = person;
+    const {id, image} = itemDetails;
+    const label = renderItemDetail(itemDetails);
     
     const personalDescr = (
         <div className="row" key={id}>
             <div className="media descr-item">
-                <img src="https://via.placeholder.com/150x200" className="align-self-start mr-3" alt="..." />
-                <div className="media-body">
-                    <h5 className="mt-0">{name}</h5>
-                    <ul>
-                        <li>Gender <strong>{gender}</strong></li>
-                        <li>Eye Color <strong>{eyeColor}</strong></li>
-                    </ul>
-                </div>
-                </div>
+                <img src={image} className="align-self-start mr-3" alt="..." />                                   
+                {label}
+            </div>
         </div>
     );
     
 
    
     // console.log(name, personLoading);
-    const showMessage = (!name && !personLoading) ? <h5>make a choise please</h5> : null; 
-    const showPersonalDescr = (name && !personLoading) ? personalDescr : null;
-    const showSpinner = (personLoading) ? <Spinner/>: null;
+    const showMessage = (!id && !itemLoading) ? <h5>make a choise please</h5> : null; 
+    const showPersonalDescr = (id && !itemLoading) ? personalDescr : null;
+    const showSpinner = (itemLoading) ? <Spinner/>: null;
     
     return (
         <div className="col-md-6">
@@ -46,11 +40,11 @@ const PersonalDetails = ( {person, personLoading} ) => {
     )
 }
 
-const mapStateToProps = (state) => {
-    return {
-        person: state.peopleList.person,
-        personLoading: state.peopleList.personLoading
-    }
-}
+// const mapStateToProps = (state) => {
+//     return {
+//         person: state.peopleList.person,
+//         personLoading: state.peopleList.personLoading
+//     }
+// }
 
-export default connect(mapStateToProps)(PersonalDetails);
+export default PersonalDetails;

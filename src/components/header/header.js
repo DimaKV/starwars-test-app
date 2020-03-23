@@ -1,20 +1,22 @@
 import React from 'react';
 import './header.css';
 
+import {Link} from 'react-router-dom';
+
 const Header = () => {
     return(
         <header>
             <div className="container">
                 <div className="row">
-                    <div className="col-sm-4 logo-row">
-                        <a href="#" className="logo">StarWars App</a>
+                    <div className="col-sm-4 logo-row">                       
+                        <Link className="logo" to = '/'> StarWars App </Link>
                     </div>
                     <div className="col-sm-8">
                         <nav className="topmenu">
                             <ul>
-                                <li><a href="#">People</a></li>
-                                <li><a href="#">Planets</a></li>
-                                <li><a href="#">Starships</a></li>
+                                <li><Link to = '/people'>People</Link></li>
+                                <li><Link to = '/planets'>Planets</Link></li>
+                                <li><Link to = '/starships'>Starships</Link></li>
                             </ul>
                         </nav>
                     </div>

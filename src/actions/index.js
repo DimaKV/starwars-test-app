@@ -37,11 +37,82 @@ const fetchRandomPlanetRequested = () => {
     }
 };
 
+
+const fetchPlanets = (newPlanet) => {
+    return {
+        type: 'FETCH_PLANETS',
+        payload: newPlanet
+    }
+};
+
+const fetchPlanetsRequested  = () => {
+    return {
+        type: "FETCH_PLANETS_REQUESTED"
+    }
+};
+
+const fetchOnePlanet = (newOnePlanet) => {
+    return {
+        type: 'FETCH_ONE_PLANET',
+        payload: newOnePlanet
+    }
+};
+
+const fetchOnePlanetRequested = () => {
+    return {
+        type: 'FETCH_ONE_PLANET_REQUESTED'
+    }
+};
+
+
+
+
+
+const fetchStarships = (newStarships) => {
+    return {
+        type: 'FETCH_STARSHIPS',
+        payload: newStarships
+    }
+};
+
+const fetchStarshipsRequested  = () => {
+    return {
+        type: "FETCH_STARSHIPS_REQUESTED"
+    }
+};
+
+const fetchOneStarship = (newOneStarship) => {
+    return {
+        type: 'FETCH_ONE_STARSHIP',
+        payload: newOneStarship
+    }
+};
+
+const fetchOneStarshipRequested = () => {
+    return {
+        type: 'FETCH_ONE_STARSHIP_REQUESTED'
+    }
+};
+
+
+
+
+
+
+
 export {
     fetchPeople,
     fetchPeopleRequested,
     fetchPerson,
     fetchPersonRequested,
     fetchRandomPlanet,
-    fetchRandomPlanetRequested
+    fetchRandomPlanetRequested,
+    fetchPlanets,
+    fetchPlanetsRequested,
+    fetchOnePlanet,
+    fetchOnePlanetRequested,
+    fetchStarships,
+    fetchStarshipsRequested,
+    fetchOneStarship,
+    fetchOneStarshipRequested
 };

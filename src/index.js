@@ -9,13 +9,15 @@ import store from './store.js';
 import {SWTProvider} from './components/starwars-test-context';
 
 import {testService} from './services';
-
+import {SwapiService} from './services';
 
 const testServiceData = new testService();
+const swapi = new SwapiService();
+
 
 ReactDOM.render(
     <Provider store = {store}>
-        <SWTProvider value={testServiceData} >
+        <SWTProvider value={swapi} >
             <App />
         </SWTProvider>
     </Provider>, 
