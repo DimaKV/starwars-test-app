@@ -63,7 +63,8 @@ const mapStateToProps = (state) => {
         data : state.planetsList.planets,
         loaded: state.planetsList.loaded,
         onePlanet: state.planetsList.onePlanet,
-        onePlanetLoading: state.planetsList.onePlanetLoading
+        onePlanetLoading: state.planetsList.onePlanetLoading,
+        localSearch: state.search.localSearch
     }
 }
 

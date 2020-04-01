@@ -14,7 +14,7 @@ import withSWT from '../hoc';
 const PeoplePage = (props) => {
     // console.log('PeoplePage', props);
     const {
-        testServiceData, data, loaded, 
+        testServiceData, data, loaded, localSearch,
         fetchPeople, fetchPeopleRequested,
         fetchPerson, fetchPersonRequested, 
         person, personLoading, clearOneObjData
@@ -42,6 +42,9 @@ const PeoplePage = (props) => {
                 
                 //данные людей, которые хранятся в sate
                 itemArr = {data}
+
+                //фраза поиска по списку
+                localSearch = {localSearch}
                 
                 // индикатор: загружен компонент или нет
                 loaded = {loaded}
@@ -86,11 +89,13 @@ const PeoplePage = (props) => {
 };
 
 const mapStateToProps = (state) => {
+    
     return {
         data : state.peopleList.people,
         loaded: state.peopleList.loaded,
         person: state.peopleList.person,
-        personLoading: state.peopleList.personLoading
+        personLoading: state.peopleList.personLoading,
+        localSearch: state.search.localSearch
     }
 }
 

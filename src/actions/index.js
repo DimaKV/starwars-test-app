@@ -117,6 +117,22 @@ const clearOneStarshipData = () => {
 
 
 
+const updateSearchData = (str) => {
+    return {
+        type: 'UPDATE_SEARCH_DATA',
+        payload: str
+    }
+};
+
+const cleaneSearchData = () => {
+    return {
+        type: 'CLEANE_SEARCH_DATA'        
+    }
+};
+
+
+
+
 
 
 
@@ -139,5 +155,8 @@ export {
     fetchStarshipsRequested,
     fetchOneStarship,
     fetchOneStarshipRequested,
-    clearOneStarshipData
+    clearOneStarshipData,
+
+    updateSearchData,
+    cleaneSearchData
 };

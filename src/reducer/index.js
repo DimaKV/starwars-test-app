@@ -33,6 +33,9 @@ const init = {
         oneStarshipLoading: false,
         oneStarship: {}     
     },
+    search: {
+        localSearch: ''
+    }
 };
 
 
@@ -42,7 +45,8 @@ const reducer = (state = init, action) => {
         peopleList: updatePeopleList(state, action),
         randomPlanet: updateRandomPlanet(state, action),
         planetsList: updatePlanetsList(state, action),
-        starshipsList: updateStarshipsList(state, action)
+        starshipsList: updateStarshipsList(state, action),
+        search: updateSearch(state, action)
     };
 };
 
@@ -240,6 +244,28 @@ const updateStarshipsList = (state, action) => {
 };
 
 
+const updateSearch = (state, action) => {
+    if(state === undefined) {
+        return state
+    }
+
+    switch (action.type) {
+        case 'UPDATE_SEARCH_DATA' : {
+            return {
+                localSearch: action.payload
+            }
+        }
+
+        case 'CLEANE_SEARCH_DATA' : {
+            return {
+                localSearch: ''
+            }
+        }
+
+        default:
+            return state.search;
+    }
+}
 
 
 

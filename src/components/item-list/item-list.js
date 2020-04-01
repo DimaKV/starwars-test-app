@@ -1,14 +1,12 @@
 import React , {Component} from 'react';
 import './item-list.css';
 
+import Search from '../search';
 import Spinner from '../spinner';
 
 
 class ItemList extends Component{
-    constructor(){
-        super();       
-    };
-
+    
 
     componentDidMount(){
         const {getData, fetchObjsRequested, fetchObjs} = this.props;
@@ -52,14 +50,15 @@ class ItemList extends Component{
 
     render(){
        
-        const {itemArr, loaded, renderItem, idFromURL } = this.props; // получаем от PeoplePage
+        const {itemArr, loaded, renderItem, localSearch } = this.props; // получаем от PeoplePage
         // console.log('dada ItemList', itemArr)
         
-        
-              
-        const showItemList = itemArr.map( (item, indx) => {
+        //фильтрация данных
+        const newItemArr = itemArr.filter( (item) => item.name.toLowerCase().includes(localSearch.toLowerCase()) );
+        // console.log('newArr', newItemArr);
+        const showItemList = newItemArr.map( (item, indx) => {
             const label = renderItem(item);
-            // console.log(label);
+            
             return (
                 <li 
                     className="list-group-item list-group-item-action"
@@ -79,6 +78,7 @@ class ItemList extends Component{
         return(
         
             <div className="col-md-6">
+                <Search/>
                 <div className="list-group list-item">
                     <ul className="list-group">
                         {showContent}

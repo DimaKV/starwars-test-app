@@ -13,10 +13,7 @@ import withSWT from '../hoc';
 
 const StarshipsPage = (props) => {
     const {
-        testServiceData, itemArr, loaded, 
-        fetchObjs, fetchObjsRequested,
-        fetchOneObj, fetchOneObjRequested, 
-        oneObj, oneObjLoading
+        testServiceData, oneObj, oneObjLoading
     } = props;
     
     return (
@@ -39,7 +36,7 @@ const StarshipsPage = (props) => {
                             <div className="media-body">
                                 <h5 className="mt-0">{item.name}</h5>
                                 <ul>
-                                    <li>Rotation Period <strong>{item.model}</strong></li>
+                                    <li>Model <strong>{item.model}</strong></li>
                                     <li>Cost in Credits <strong>{item.costInCredits}</strong></li>
                                     <li>Crew <strong>{item.crew}</strong></li>
                                     <li>Passengers <strong>{item.passengers}</strong></li>                                                                    
@@ -60,7 +57,8 @@ const mapStateToProps = (state) => {
         itemArr : state.starshipsList.starships,
         loaded: state.starshipsList.loaded,
         oneObj: state.starshipsList.oneStarship,
-        oneObjLoading: state.starshipsList.oneStarshipLoading
+        oneObjLoading: state.starshipsList.oneStarshipLoading,
+        localSearch: state.search.localSearch
     }
 }
 
