@@ -34,7 +34,7 @@ const init = {
         oneStarship: {}     
     },
     search: {
-        localSearch: ''
+        localSearch: ''       
     }
 };
 

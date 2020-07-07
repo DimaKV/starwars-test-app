@@ -8,10 +8,10 @@ import store from './store.js';
 
 import {SWTProvider} from './components/starwars-test-context';
 
-import {testService} from './services';
+// import {testService} from './services';
 import {SwapiService} from './services';
 
-const testServiceData = new testService();
+// const testServiceData = new testService();
 const swapi = new SwapiService();
 
 

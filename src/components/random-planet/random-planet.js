@@ -58,7 +58,7 @@ class RandomPlanet extends Component {
     }   
 
     componentWillUnmount(){
-        console.log('planet gone');
+        // console.log('planet gone');
         clearInterval(this.intervalID);
     }
 
