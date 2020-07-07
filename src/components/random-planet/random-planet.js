@@ -68,7 +68,7 @@ class RandomPlanet extends Component {
         const randomPlanet = (
           
                 <div className="media planet">
-                    <img src={`http://raw.githubusercontent.com/tbone849/star-wars-guide/master/build/assets/img/planets/${planet.id}.jpg` } className="align-self-start mr-3" alt="..." />
+                    <img src={`https://raw.githubusercontent.com/tbone849/star-wars-guide/master/build/assets/img/planets/${planet.id}.jpg` } className="align-self-start mr-3" alt="..." />
                     <div className="media-body">
                         <h5 className="mt-0">{planet.name}</h5>
                         <ul>

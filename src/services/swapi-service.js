@@ -16,7 +16,7 @@
 
 class SwapiService {
    constructor(){
-       this._apiBase = 'http://swapi.dev/api';
+       this._apiBase = 'https://swapi.dev/api';
        this._imageBase = 'https://raw.githubusercontent.com/tbone849/star-wars-guide/master/build/assets/img';
    }
 
