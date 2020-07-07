@@ -104,8 +104,8 @@ class SwapiService {
           name: planet.name,
           population: planet.population,
           rotationPeriod: planet.rotation_period,
-          diameter: planet.diameter,
-          image: this.getPlanetImage(newID)
+          diameter: planet.diameter
+        //   image: this.getPlanetImage(newID)
        };
     };
 
