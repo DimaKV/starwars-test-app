@@ -21,7 +21,11 @@ class SwapiService {
    }
 
    getResources = async (url) => {
-        let res = await fetch(`${this._apiBase}${url}`);
+        let res = await fetch(`${this._apiBase}${url}`, {
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+            }
+        });
         if (!res.ok) {
             throw new Error (`error with ${url} and receive ${res.status}`);
         }
