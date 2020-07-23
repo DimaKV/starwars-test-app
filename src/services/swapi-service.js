@@ -24,6 +24,7 @@ class SwapiService {
         let res = await fetch(`${this._apiBase}${url}`, {
             headers: {
                 "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Credentials": true
             }
         });
         if (!res.ok) {
