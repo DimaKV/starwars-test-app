@@ -16,14 +16,14 @@
 
 class SwapiService {
    constructor(){
-       this._apiBase = 'https://swapi.co/api';
+       this._apiBase = 'https://swapi.dev/api';
        this._imageBase = 'https://starwars-visualguide.com/assets/img';
    }
 
    getResources = async (url) => {
         let res = await fetch(`${this._apiBase}${url}`);
         if (!res.ok) {
-            throw new Error (`error with ${url}` + ` and receive ${res.status}`);
+            throw new Error (`error with ${url} and receive ${res.status}`);
         }
         const body = await res.json();
         return body;
