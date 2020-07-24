@@ -17,13 +17,18 @@
 class SwapiService {
    constructor(){
        this._apiBase = 'https://swapi.dev/api';
-       this._imageBase = 'https://raw.githubusercontent.com/tbone849/star-wars-guide/master/build/assets/img';
+       this._imageBase = 'https://starwars-visualguide.com/assets/img';
    }
 
    getResources = async (url) => {
-        let res = await fetch(`${this._apiBase}${url}`);
+        let res = await fetch(`${this._apiBase}${url}`, {
+            headers: {
+                "Access-Control-Allow-Origin": "*",                
+                "Access-Control-Allow-Credentials": true
+            }
+        });
         if (!res.ok) {
-            throw new Error (`error with ${url}` + ` and receive ${res.status}`);
+            throw new Error (`error with ${url} and receive ${res.status}`);
         }
         const body = await res.json();
         return body;
