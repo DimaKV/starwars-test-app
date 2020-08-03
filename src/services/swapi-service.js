@@ -1,18 +1,10 @@
-// const url = 'https://swapi.co/api/';
-
-// const getData = async (url) => {
-//     const resp = await fetch(url);
-//     if (!res.ok) {
-//         throw new Error (`error with ${url}` +
-//         ` and receive ${res.status}`);
+// {
+//     headers: {
+//         "Access-Control-Allow-Origin": "*",                
+//         "Access-Control-Allow-Credentials": true
 //     }
-//     const body = await resp.json();
-//     return body;
 // }
 
-// getData(`${url}/people`)
-// .then ( (body) => console.log(body) )
-// .catch ( (err) => console.log('Could not fetch:', err ) );
 
 class SwapiService {
    constructor(){
@@ -21,12 +13,7 @@ class SwapiService {
    }
 
    getResources = async (url) => {
-        let res = await fetch(`${this._apiBase}${url}`, {
-            headers: {
-                "Access-Control-Allow-Origin": "*",                
-                "Access-Control-Allow-Credentials": true
-            }
-        });
+        let res = await fetch(`${this._apiBase}${url}`);
         if (!res.ok) {
             throw new Error (`error with ${url} and receive ${res.status}`);
         }
