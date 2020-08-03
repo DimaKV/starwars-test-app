@@ -1,3 +1,10 @@
+// {
+//     headers: {
+//         "Access-Control-Allow-Origin": "*",                
+//         "Access-Control-Allow-Credentials": true
+//     }
+// }
+
 class SwapiService {
    constructor(){
        this._apiBase = 'https://swapi.dev/api';
@@ -5,12 +12,7 @@ class SwapiService {
    }
 
    getResources = async (url) => {
-        let res = await fetch(`${this._apiBase}${url}`, {
-            headers: {
-                "Access-Control-Allow-Origin": "*",                
-                "Access-Control-Allow-Credentials": true
-            }
-        });
+        let res = await fetch(`${this._apiBase}${url}`);
         if (!res.ok) {
             throw new Error (`error with ${url} and receive ${res.status}`);
         }
