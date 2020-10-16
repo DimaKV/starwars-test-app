@@ -7,7 +7,7 @@
 
 class SwapiService {
    constructor(){
-       this._apiBase = 'https://swapi.dev/api';
+       this._apiBase = 'https://swapi.py4e.com/api';
        this._imageBase = 'https://starwars-visualguide.com/assets/img';
    }
 
